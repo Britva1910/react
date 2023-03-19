@@ -1,4 +1,4 @@
-import React, { Component } from 'react';
+import React from 'react';
 import styles from './about-us-page.module.scss';
 
 export default class AboutUsPage extends React.Component {

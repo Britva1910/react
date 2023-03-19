@@ -1,6 +1,18 @@
 import React, { Component } from 'react';
-import { ICardData } from 'components/pages/main-page/main-page';
 import styles from './card.module.scss';
+
+interface ICardData {
+  title: string;
+  author: string;
+  publisher: string;
+  year: number;
+  ISBN: string;
+  language: string;
+  format: string;
+  pages: number;
+  category: string;
+  imgURL: string;
+}
 
 export default class Card extends Component<ICardData> {
   render() {

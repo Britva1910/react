@@ -9,9 +9,13 @@ describe('Card component', () => {
         author="John Doe"
         title="Example Book"
         imgURL="https://example.com/book.jpg"
-        year="2022"
+        year={2022}
         language="English"
-        pages="200"
+        pages={200}
+        publisher="Microsoft Press"
+        ISBN="978-0735619678"
+        format="Paperback"
+        category="Software Engineering"
       />
     );
 

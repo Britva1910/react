@@ -1,5 +1,4 @@
 import React from 'react';
-import { mount } from 'vitest';
 import { render, screen, fireEvent } from '@testing-library/react';
 import SearchBar from '../components/search-bar/search-bar';
 

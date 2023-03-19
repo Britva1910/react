@@ -1,6 +1,5 @@
 import React from 'react';
 import { NavLink } from 'react-router-dom';
-import { s } from 'vitest/dist/env-afee91f0';
 import { withRouter } from '../../utils/withRouter';
 import styles from './header.module.scss';
 
