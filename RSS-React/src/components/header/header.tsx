@@ -1,5 +1,6 @@
 import React from 'react';
 import { NavLink } from 'react-router-dom';
+import { s } from 'vitest/dist/env-afee91f0';
 import { withRouter } from '../../utils/withRouter';
 import styles from './header.module.scss';
 
@@ -32,7 +33,6 @@ class Header extends React.Component<LocationProps> {
   render(): React.ReactNode {
     return (
       <header className={styles.wrapper}>
-        <span>{this.getCurrentPageName(this.props.location.pathname)}</span>
         <nav className={styles.navigation}>
           <ul className={styles.menu}>
             <li className={styles.list}>
@@ -43,6 +43,9 @@ class Header extends React.Component<LocationProps> {
             </li>
           </ul>
         </nav>
+        <span className={styles.current_page}>
+          {this.getCurrentPageName(this.props.location.pathname)}
+        </span>
       </header>
     );
   }

@@ -27,7 +27,7 @@ export default class MainPage extends React.Component {
 
   render() {
     return (
-      <div>
+      <div className={styles.container}>
         <SearchBar />
         <ul className={styles.wrapper}>{...this.listCards}</ul>
       </div>

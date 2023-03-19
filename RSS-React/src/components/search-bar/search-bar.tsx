@@ -24,7 +24,13 @@ export default class SearchBar extends Component<Record<string, never>, ISearchB
   render() {
     return (
       <div className={styles.wrapper}>
-        <input defaultValue={this.state.value} type="text" onChange={this.handleChange} />
+        <input
+          defaultValue={this.state.value}
+          className={styles.input}
+          placeholder="search"
+          type="text"
+          onChange={this.handleChange}
+        />
       </div>
     );
   }

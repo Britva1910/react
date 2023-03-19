@@ -11,9 +11,9 @@ export default class Card extends Component<ICardData> {
         <div>
           <img src={imgURL} alt="img book" />
         </div>
-        <div>{title}</div>
+        <div className={styles.title}>{title}</div>
         <div className={styles.information_section}>
-          <span>{author}</span>
+          <span className={styles.author}>{author}</span>
           <span>{year}</span>
           <span>{language}</span>
           <span>{pages}</span>
