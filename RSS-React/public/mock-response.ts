@@ -9,7 +9,7 @@ export const booksData = [
     format: 'Paperback',
     pages: 464,
     category: 'Software Engineering',
-    imgURL: '../../clean_code.jpg',
+    imgURL: '../src/assets/clean_code.jpg',
   },
   {
     title: 'The Phoenix Project: A Novel About IT, DevOps, and Helping Your Business Win',
@@ -21,7 +21,7 @@ export const booksData = [
     format: 'Paperback',
     pages: 376,
     category: 'DevOps',
-    imgURL: '../../phoenix_project.jpg',
+    imgURL: '../src/assets/phoenix_project.jpg',
   },
   {
     title:
@@ -34,7 +34,7 @@ export const booksData = [
     format: 'Paperback',
     pages: 616,
     category: 'Database Systems',
-    imgURL: '../../designing-data.jpg',
+    imgURL: '../src/assets/designing-data.jpg',
   },
   {
     title: 'Code Complete: A Practical Handbook of Software Construction',
@@ -46,7 +46,7 @@ export const booksData = [
     format: 'Paperback',
     pages: 960,
     category: 'Software Engineering',
-    imgURL: '../../code_complete.jpg',
+    imgURL: '../src/assets/code_complete.jpg',
   },
   {
     title: 'The Art of Computer Programming, Volumes 1-4A Boxed Set',
@@ -58,7 +58,7 @@ export const booksData = [
     format: 'Hardcover',
     pages: 3168,
     category: 'Algorithms',
-    imgURL: '../../art_of_computer.png',
+    imgURL: '../src/assets/art_of_computer.png',
   },
   {
     title: 'Head First Design Patterns: A Brain-Friendly Guide',
@@ -70,7 +70,7 @@ export const booksData = [
     format: 'Paperback',
     pages: 694,
     category: 'Software Design Patterns',
-    imgURL: '../../design_patterns.jpg',
+    imgURL: '../src/assets/design_patterns.jpg',
   },
   {
     title: "The Clean Architecture: A Craftsman's Guide to Software Structure and Design",
@@ -82,6 +82,6 @@ export const booksData = [
     format: 'Hardcover',
     pages: 432,
     category: 'Software Architecture',
-    imgURL: '../../clean_arch.jpg',
+    imgURL: '../src/assets/clean_arch.jpg',
   },
 ];
