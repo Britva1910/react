@@ -23,6 +23,10 @@ class Header extends React.Component<LocationProps> {
         return 'About us page';
         break;
 
+      case '/form':
+        return 'Form';
+        break;
+
       default:
         return 'Ooops...';
         break;
@@ -35,10 +39,13 @@ class Header extends React.Component<LocationProps> {
         <nav className={styles.navigation}>
           <ul className={styles.menu}>
             <li className={styles.list}>
+              <NavLink to="./">Main page</NavLink>
+            </li>
+            <li className={styles.list}>
               <NavLink to="./about-us">About us</NavLink>
             </li>
             <li className={styles.list}>
-              <NavLink to="./">Main page</NavLink>
+              <NavLink to="./form">Form</NavLink>
             </li>
           </ul>
         </nav>

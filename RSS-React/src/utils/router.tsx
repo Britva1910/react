@@ -11,6 +11,10 @@ export const router = createBrowserRouter([
     element: <div>about us page</div>,
   },
   {
+    path: '/form',
+    element: <div>about us page</div>,
+  },
+  {
     path: '*',
     element: <div>404 page</div>,
   },
