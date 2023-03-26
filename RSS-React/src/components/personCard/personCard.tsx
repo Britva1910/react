@@ -1,8 +1,13 @@
 import React from 'react';
 import styles from './personCard.module.scss';
+import { IPersonCard } from '../../shared/models';
 
-export default class PersonCard extends React.Component {
-  constructor(props) {
+type PersonCardProps = {
+  data: IPersonCard;
+};
+
+export default class PersonCard extends React.Component<PersonCardProps, Record<string, never>> {
+  constructor(props: PersonCardProps) {
     super(props);
   }
   render() {

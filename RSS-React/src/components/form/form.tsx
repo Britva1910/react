@@ -28,7 +28,7 @@ type FormErrorsState = {
 export default class Form extends React.Component<FormProps, FormState> {
   inputUserName: RefObject<HTMLInputElement>;
   inputUserSurname: RefObject<HTMLInputElement>;
-  inputCountry: RefObject<HTMLInputElement>;
+  inputCountry: RefObject<HTMLSelectElement>;
   inputConsent: RefObject<HTMLInputElement>;
   inputPromo: RefObject<HTMLInputElement>;
   inputSales: RefObject<HTMLInputElement>;
@@ -59,7 +59,7 @@ export default class Form extends React.Component<FormProps, FormState> {
     this.handleFileChange = this.handleFileChange.bind(this);
   }
 
-  handleSubmit(event: Event) {
+  handleSubmit(event: React.MouseEvent<HTMLButtonElement>) {
     event.preventDefault();
     const newData = {
       name: this.inputUserName.current?.value,
@@ -101,7 +101,10 @@ export default class Form extends React.Component<FormProps, FormState> {
   }
 
   handleFileChange(event: ChangeEvent<HTMLInputElement>) {
-    this.setState({ profilePicture: event.target?.files[0] });
+    const files = event.target?.files;
+    if (files && files.length > 0) {
+      this.setState({ profilePicture: files[0] });
+    }
   }
 
   validation() {
