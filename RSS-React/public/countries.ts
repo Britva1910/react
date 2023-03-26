@@ -1,7 +1,9 @@
 import { countries } from 'countries-list';
 
-export const countryList = [];
+export const countryList: string[] = [];
 
 for (const key in countries) {
-  countryList.push(countries[key].name);
+  if (Object.prototype.hasOwnProperty.call(countries, key)) {
+    countryList.push(countries[key as keyof typeof countries].name);
+  }
 }

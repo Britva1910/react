@@ -1,22 +1,31 @@
-import React, { RefObject } from 'react';
+import React, { ChangeEvent, RefObject } from 'react';
 import styles from './form.module.scss';
 import { countryList } from '../../../public/countries';
 import { IPersonCard } from '../../shared/models';
 
-type PropsType = {
-  updateData: void;
+type FormProps = {
+  updateData: (data: IPersonCard) => void;
 };
 
-type StateType = {
+type FormState = {
   cards: IPersonCard[];
   countries: string[];
-  selectedCountry: string;
+  selectedCountry: string | undefined;
   profilePicture: string | null;
   fields: Partial<IPersonCard>;
-  errors: Partial<IPersonCard>;
+  errors: Partial<FormErrorsState>;
 };
 
-export default class Form extends React.Component<PropsType, StateType> {
+type FormErrorsState = {
+  name: string | undefined;
+  surname: string | undefined;
+  country: string | undefined;
+  consent: string | undefined;
+  promoValue: string | undefined;
+  file: string | null;
+};
+
+export default class Form extends React.Component<FormProps, FormState> {
   inputUserName: RefObject<HTMLInputElement>;
   inputUserSurname: RefObject<HTMLInputElement>;
   inputCountry: RefObject<HTMLInputElement>;
@@ -25,7 +34,7 @@ export default class Form extends React.Component<PropsType, StateType> {
   inputSales: RefObject<HTMLInputElement>;
   inputFile: RefObject<HTMLInputElement>;
 
-  constructor(prop) {
+  constructor(props: FormProps) {
     super(props);
     this.state = {
       cards: [],
@@ -48,7 +57,7 @@ export default class Form extends React.Component<PropsType, StateType> {
     this.handleFileChange = this.handleFileChange.bind(this);
   }
 
-  handleSubmit(event) {
+  handleSubmit(event: Event) {
     event.preventDefault();
     const newData = {
       name: this.inputUserName.current?.value,
@@ -57,28 +66,31 @@ export default class Form extends React.Component<PropsType, StateType> {
       consent: this.inputConsent.current?.checked,
       promoValue: this.inputPromo.current?.checked,
       file:
-        this.inputFile.current?.files?.length > 0
+        this.inputFile.current?.files?.length && this.inputFile.current?.files?.length > 0
           ? URL.createObjectURL(this.inputFile.current.files[0])
           : '',
     };
 
-    this.setState({ fields: newData });
-    const valid = this.validation();
-    if (true) {
-      //ANCHOR - заменить на валидацию
-      this.props.updateData(newData);
+    this.setState({ fields: newData }, () => this.setData(newData));
+  }
+  setData(data: IPersonCard) {
+    const validationStatus = this.validation();
+    if (validationStatus) {
+      alert('User data was stored');
+      this.props.updateData(data);
+      this.cleareForm();
     }
   }
 
   handleInputUserName() {
     const fields = this.state.fields;
-    fields['name'] = this.inputUserName.current?.value; //FIXME -
+    fields['name'] = this.inputUserName.current?.value;
     this.setState({ fields });
   }
 
   handleInputUserSurname() {
     const fields = this.state.fields;
-    fields['surname'] = this.inputUserSurname.current?.value; //FIXME -
+    fields['surname'] = this.inputUserSurname.current?.value;
     this.setState({ fields });
   }
 
@@ -86,8 +98,8 @@ export default class Form extends React.Component<PropsType, StateType> {
     this.setState({ selectedCountry: this.inputCountry.current?.value });
   }
 
-  handleFileChange(event) {
-    this.setState({ profilePicture: event.target.files[0] });
+  handleFileChange(event: ChangeEvent<HTMLInputElement>) {
+    this.setState({ profilePicture: event.target?.files[0] });
   }
 
   validation() {
@@ -155,17 +167,23 @@ export default class Form extends React.Component<PropsType, StateType> {
 
     if (formIsValid) {
       for (const key in errors) {
-        errors[key] = '';
+        errors[key as keyof FormErrorsState] = '';
       }
     }
     this.setState({ errors: errors });
     return formIsValid;
   }
 
-  cleareForm() {}
+  cleareForm() {
+    const initialData = Object.assign({}, this.state.fields);
+    for (const key in initialData) {
+      initialData[key] = '';
+    }
+    this.setState({ fields: initialData });
+  }
 
   render() {
-    const { countries, selectedCountry, profilePicture } = this.state;
+    const { countries, profilePicture } = this.state;
     return (
       <div className={styles.wrapper}>
         {/* Input text */}

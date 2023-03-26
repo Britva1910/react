@@ -3,12 +3,8 @@ import Form from '../../form/form';
 import PersonCard from '../../personCard/personCard';
 import styles from './form-page.module.scss';
 
-interface IFormState {
-  cards: ICard[];
-}
-
 export default class FormPage extends React.Component {
-  constructor(props: {} | Readonly<{}>) {
+  constructor(props) {
     super(props);
     this.state = { cards: [] };
     this.updateStateFormPage = this.updateStateFormPage.bind(this);
