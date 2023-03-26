@@ -1,8 +1,22 @@
 import React, { RefObject } from 'react';
 import styles from './form.module.scss';
 import { countryList } from '../../../public/countries';
+import { IPersonCard } from '../../shared/models';
 
-export default class Form extends React.Component {
+type PropsType = {
+  updateData: void;
+};
+
+type StateType = {
+  cards: IPersonCard[];
+  countries: string[];
+  selectedCountry: string;
+  profilePicture: string | null;
+  fields: Partial<IPersonCard>;
+  errors: Partial<IPersonCard>;
+};
+
+export default class Form extends React.Component<PropsType, StateType> {
   inputUserName: RefObject<HTMLInputElement>;
   inputUserSurname: RefObject<HTMLInputElement>;
   inputCountry: RefObject<HTMLInputElement>;
@@ -11,11 +25,12 @@ export default class Form extends React.Component {
   inputSales: RefObject<HTMLInputElement>;
   inputFile: RefObject<HTMLInputElement>;
 
-  constructor(props) {
+  constructor(prop) {
     super(props);
     this.state = {
       cards: [],
       countries: countryList,
+      selectedCountry: '',
       profilePicture: null,
       fields: {},
       errors: {},
@@ -49,28 +64,26 @@ export default class Form extends React.Component {
 
     this.setState({ fields: newData });
     const valid = this.validation();
-    //console.log('valid - ', valid);
-    if (valid) {
+    if (true) {
+      //ANCHOR - заменить на валидацию
       this.props.updateData(newData);
     }
   }
 
   handleInputUserName() {
-    let fields = this.state.fields;
+    const fields = this.state.fields;
     fields['name'] = this.inputUserName.current?.value; //FIXME -
     this.setState({ fields });
   }
 
   handleInputUserSurname() {
-    let fields = this.state.fields;
+    const fields = this.state.fields;
     fields['surname'] = this.inputUserSurname.current?.value; //FIXME -
     this.setState({ fields });
   }
 
   handleSelectInput() {
-    let fields = this.state.fields;
-    fields['country'] = this.inputCountry.current?.value;
-    this.setState({ fields });
+    this.setState({ selectedCountry: this.inputCountry.current?.value });
   }
 
   handleFileChange(event) {
@@ -127,7 +140,6 @@ export default class Form extends React.Component {
     }
 
     //Consent
-    console.log('consent - ', fields['consent']);
     if (typeof fields['consent'] == 'undefined') {
       errors['consent'] = 'Please consent your personal data';
     } else {
@@ -166,7 +178,6 @@ export default class Form extends React.Component {
                 this.inputUserName.current?.validity.valid ? '' : styles.input_invalid
               }`}
               ref={this.inputUserName}
-              onChange={this.handleInputUserName.bind(this)}
             />
           </div>
           <span className={styles.error_message}>{this.state.errors['name']}</span>
@@ -180,7 +191,6 @@ export default class Form extends React.Component {
                 this.inputUserSurname.current?.validity.valid ? '' : styles.input_invalid
               }`}
               ref={this.inputUserSurname}
-              onChange={this.handleInputUserSurname.bind(this)}
             />
           </div>
           <span className={styles.error_message}>{this.state.errors['surname']}</span>
@@ -193,7 +203,7 @@ export default class Form extends React.Component {
             <select
               id="country"
               ref={this.inputCountry}
-              value={this.state.fields.country}
+              value={this.state.selectedCountry}
               onChange={this.handleSelectInput}
               className={styles.select}
             >
