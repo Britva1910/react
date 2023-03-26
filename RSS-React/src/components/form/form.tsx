@@ -122,7 +122,7 @@ export default class Form extends React.Component<FormProps, FormState> {
       const regex = /^[A-Z]/;
       if (!regex.test(fields['name'])) {
         formIsValid = false;
-        errors['name'] = 'Only letters, the first letter should be uppercase';
+        errors['name'] = 'Only latin letters, the first letter should be uppercase';
       }
       if (fields['name'].length < 5) {
         formIsValid = false;
@@ -139,7 +139,7 @@ export default class Form extends React.Component<FormProps, FormState> {
       const regex = /^[A-Z]/;
       if (!regex.test(fields['surname'])) {
         formIsValid = false;
-        errors['surname'] = 'Only letters, the first letter should be uppercase';
+        errors['surname'] = 'Only latin letters, the first letter should be uppercase';
       }
       if (fields['surname'].length < 5) {
         formIsValid = false;
@@ -179,6 +179,7 @@ export default class Form extends React.Component<FormProps, FormState> {
 
   clearForm() {
     this.form.current?.reset();
+    this.setState({ profilePicture: null });
   }
 
   render() {
