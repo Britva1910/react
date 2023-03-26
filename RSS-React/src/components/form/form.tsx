@@ -10,12 +10,12 @@ export default class Form extends React.Component {
   inputPromo: RefObject<HTMLInputElement>;
   inputSales: RefObject<HTMLInputElement>;
   inputFile: RefObject<HTMLInputElement>;
+
   constructor(props) {
     super(props);
     this.state = {
       cards: [],
       countries: countryList,
-      selectedCountry: '',
       profilePicture: null,
       fields: {},
       errors: {},
@@ -49,15 +49,32 @@ export default class Form extends React.Component {
 
     this.setState({ fields: newData });
     const valid = this.validation();
-    console.log('valid - ', valid);
-
-    this.props.updateData(newData);
+    //console.log('valid - ', valid);
+    if (valid) {
+      this.props.updateData(newData);
+    }
   }
 
-  handleChange(field) {
+  handleInputUserName() {
     let fields = this.state.fields;
-    fields[field] = this.inputUserName.current?.value;
+    fields['name'] = this.inputUserName.current?.value; //FIXME -
     this.setState({ fields });
+  }
+
+  handleInputUserSurname() {
+    let fields = this.state.fields;
+    fields['surname'] = this.inputUserSurname.current?.value; //FIXME -
+    this.setState({ fields });
+  }
+
+  handleSelectInput() {
+    let fields = this.state.fields;
+    fields['country'] = this.inputCountry.current?.value;
+    this.setState({ fields });
+  }
+
+  handleFileChange(event) {
+    this.setState({ profilePicture: event.target.files[0] });
   }
 
   validation() {
@@ -67,7 +84,6 @@ export default class Form extends React.Component {
 
     //Name
     if (!fields['name']) {
-      console.log(fields['name']);
       formIsValid = false;
       errors['name'] = 'Cannot be empty';
     }
@@ -83,15 +99,46 @@ export default class Form extends React.Component {
         errors['name'] = 'Name should be at least 5 characters';
       }
     }
-
     //Surname
+    if (!fields['surname']) {
+      formIsValid = false;
+      errors['surname'] = 'Cannot be empty';
+    }
 
+    if (typeof fields['surname'] !== 'undefined') {
+      const regex = /^[A-Z]/;
+      if (!regex.test(fields['surname'])) {
+        formIsValid = false;
+        errors['surname'] = 'Only letters, the first letter should be uppercase';
+      }
+      if (fields['surname'].length < 5) {
+        formIsValid = false;
+        errors['surname'] = 'Surname should be at least 5 characters';
+      }
+    }
     //Country
+    if (typeof fields['country'] !== 'undefined') {
+      if (fields['country'].length == 0) {
+        formIsValid = false;
+        errors['country'] = 'Please select a country';
+      }
+    } else {
+      errors['country'] = '';
+    }
 
     //Consent
-
+    console.log('consent - ', fields['consent']);
+    if (typeof fields['consent'] == 'undefined') {
+      errors['consent'] = 'Please consent your personal data';
+    } else {
+      errors['consent'] = '';
+    }
     //Promo
-
+    if (typeof fields['promoValue'] == 'undefined') {
+      errors['promoValue'] = 'Please choose one point';
+    } else {
+      errors['promoValue'] = '';
+    }
     //File
 
     if (formIsValid) {
@@ -100,17 +147,7 @@ export default class Form extends React.Component {
       }
     }
     this.setState({ errors: errors });
-    console.log(this.state.errors);
     return formIsValid;
-  }
-
-  handleSelectInput(event) {
-    event.preventDefault();
-    this.setState({ selectedCountry: event.target.value });
-  }
-
-  handleFileChange(event) {
-    this.setState({ profilePicture: event.target.files[0] });
   }
 
   cleareForm() {}
@@ -129,7 +166,7 @@ export default class Form extends React.Component {
                 this.inputUserName.current?.validity.valid ? '' : styles.input_invalid
               }`}
               ref={this.inputUserName}
-              onChange={this.handleChange.bind(this, 'name')}
+              onChange={this.handleInputUserName.bind(this)}
             />
           </div>
           <span className={styles.error_message}>{this.state.errors['name']}</span>
@@ -143,12 +180,10 @@ export default class Form extends React.Component {
                 this.inputUserSurname.current?.validity.valid ? '' : styles.input_invalid
               }`}
               ref={this.inputUserSurname}
-              pattern="[A-Z][a-z]{4,}$"
+              onChange={this.handleInputUserSurname.bind(this)}
             />
           </div>
-          {!this.inputUserSurname.current?.validity.valid && (
-            <span className={styles.error_message}>{'Error text'}</span>
-          )}
+          <span className={styles.error_message}>{this.state.errors['surname']}</span>
         </div>
         <div>
           <div className={styles.input_wrapper}>
@@ -158,8 +193,7 @@ export default class Form extends React.Component {
             <select
               id="country"
               ref={this.inputCountry}
-              value={selectedCountry}
-              required
+              value={this.state.fields.country}
               onChange={this.handleSelectInput}
               className={styles.select}
             >
@@ -171,9 +205,7 @@ export default class Form extends React.Component {
               ))}
             </select>
           </div>
-          {!this.inputCountry.current?.validity.valid && (
-            <span className={styles.error_message}>{'Error country'}</span>
-          )}
+          <span className={styles.error_message}>{this.state.errors['country']}</span>
         </div>
         <div>
           <div className={styles.input_wrapper}>
@@ -182,9 +214,7 @@ export default class Form extends React.Component {
               <span className={styles.checkmark}></span>I consent to my personal data
             </label>
           </div>
-          {!this.inputConsent.current?.validity.valid && (
-            <span className={styles.error_message}>{'Error text'}</span>
-          )}
+          <span className={styles.error_message}>{this.state.errors['consent']}</span>
         </div>
         {/* radio */}
 
@@ -201,6 +231,7 @@ export default class Form extends React.Component {
               {"No, I don't want to receive promo notifications"}
             </label>
           </div>
+          <span className={styles.error_message}>{this.state.errors['promoValue']}</span>
         </div>
 
         <div className={styles.wrapper_file}>
