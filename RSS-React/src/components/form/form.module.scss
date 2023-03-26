@@ -138,4 +138,62 @@
     border-width: 0 3px 3px 0;
     transform: rotate(45deg);
   }
+ 
+  .notification_form {
+    margin: 30px auto;
+    label {
+      display: block;
+      margin-bottom: 10px;
+      font-size: 16px;
+    }
+  
+    input[type="radio"] {
+      margin-right: 10px;
+      vertical-align: middle;
+    }
+  
+    input[type="radio"]:checked + label {
+      color: blue;
+    }
+  }
+  
+
+  .wrapper_file {
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+  }
+  
+  .label_file {
+    width: 200px;
+    display: block;
+    font-size: 1rem;
+    margin-bottom: 0.5rem;
+    padding: 0.5rem;
+    border: 2px solid #ccc;
+    border-radius: 0.5rem;
+    cursor: pointer;
+    text-align: center;
+  }
+  
+  .input_file {
+    display: none;
+  }
+  
+  .button_file {
+    margin-top: 1rem;
+    background-color: #0077ff;
+    color: #fff;
+    font-size: 1rem;
+    padding: 0.5rem 1rem;
+    border: none;
+    border-radius: 0.5rem;
+    cursor: pointer;
+    transition: background-color 0.2s ease;
+  }
+  
+  .button_file:hover {
+    background-color: #0066cc;
+  }
   
