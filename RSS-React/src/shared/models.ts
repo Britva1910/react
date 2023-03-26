@@ -2,7 +2,7 @@ export interface IPersonCard {
   name: string | undefined;
   surname: string | undefined;
   country: string | undefined;
-  consent: boolean | undefined;
-  promoValue: boolean | undefined;
+  consent: string | undefined;
+  promoValue: string | undefined;
   file: string;
 }

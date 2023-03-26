@@ -11,7 +11,7 @@ type FormState = {
   cards: IPersonCard[];
   countries: string[];
   selectedCountry: string | undefined;
-  profilePicture: string | null;
+  profilePicture: File | null;
   fields: Partial<IPersonCard>;
   errors: Partial<FormErrorsState>;
 };
@@ -33,6 +33,7 @@ export default class Form extends React.Component<FormProps, FormState> {
   inputPromo: RefObject<HTMLInputElement>;
   inputSales: RefObject<HTMLInputElement>;
   inputFile: RefObject<HTMLInputElement>;
+  form: RefObject<HTMLFormElement>;
 
   constructor(props: FormProps) {
     super(props);
@@ -52,6 +53,7 @@ export default class Form extends React.Component<FormProps, FormState> {
     this.inputPromo = React.createRef();
     this.inputSales = React.createRef();
     this.inputFile = React.createRef();
+    this.form = React.createRef();
     this.handleSubmit = this.handleSubmit.bind(this);
     this.handleSelectInput = this.handleSelectInput.bind(this);
     this.handleFileChange = this.handleFileChange.bind(this);
@@ -78,7 +80,7 @@ export default class Form extends React.Component<FormProps, FormState> {
     if (validationStatus) {
       alert('User data was stored');
       this.props.updateData(data);
-      this.cleareForm();
+      this.clearForm();
     }
   }
 
@@ -150,7 +152,6 @@ export default class Form extends React.Component<FormProps, FormState> {
     } else {
       errors['country'] = '';
     }
-
     //Consent
     if (typeof fields['consent'] == 'undefined') {
       errors['consent'] = 'Please consent your personal data';
@@ -164,7 +165,6 @@ export default class Form extends React.Component<FormProps, FormState> {
       errors['promoValue'] = '';
     }
     //File
-
     if (formIsValid) {
       for (const key in errors) {
         errors[key as keyof FormErrorsState] = '';
@@ -174,110 +174,107 @@ export default class Form extends React.Component<FormProps, FormState> {
     return formIsValid;
   }
 
-  cleareForm() {
-    const initialData = Object.assign({}, this.state.fields);
-    for (const key in initialData) {
-      initialData[key] = '';
-    }
-    this.setState({ fields: initialData });
+  clearForm() {
+    this.form.current?.reset();
   }
 
   render() {
     const { countries, profilePicture } = this.state;
     return (
       <div className={styles.wrapper}>
-        {/* Input text */}
-        <div>
-          <div className={styles.input_wrapper}>
-            <span>Name*</span>
-            <input
-              type="text"
-              className={`${styles.input_text} ${
-                this.inputUserName.current?.validity.valid ? '' : styles.input_invalid
-              }`}
-              ref={this.inputUserName}
-            />
-          </div>
-          <span className={styles.error_message}>{this.state.errors['name']}</span>
-        </div>
-        <div>
-          <div className={styles.input_wrapper}>
-            <span>Surame*</span>
-            <input
-              type="text"
-              className={`${styles.input_text} ${
-                this.inputUserSurname.current?.validity.valid ? '' : styles.input_invalid
-              }`}
-              ref={this.inputUserSurname}
-            />
-          </div>
-          <span className={styles.error_message}>{this.state.errors['surname']}</span>
-        </div>
-        <div>
-          <div className={styles.input_wrapper}>
-            <label htmlFor="country" className={styles.label}>
-              Country*:
-            </label>
-            <select
-              id="country"
-              ref={this.inputCountry}
-              value={this.state.selectedCountry}
-              onChange={this.handleSelectInput}
-              className={styles.select}
-            >
-              <option value="">-- Select a country --</option>
-              {countries.map((country) => (
-                <option key={country} value={country}>
-                  {country}
-                </option>
-              ))}
-            </select>
-          </div>
-          <span className={styles.error_message}>{this.state.errors['country']}</span>
-        </div>
-        <div>
-          <div className={styles.input_wrapper}>
-            <label className={styles.checkbox_container}>
-              <input type="checkbox" ref={this.inputConsent} />
-              <span className={styles.checkmark}></span>I consent to my personal data
-            </label>
-          </div>
-          <span className={styles.error_message}>{this.state.errors['consent']}</span>
-        </div>
-        {/* radio */}
-
-        <div className={styles.notification_form}>
+        <form action="" ref={this.form}>
+          {/* Input text */}
           <div>
-            <label>
-              <input type="radio" name="promo" value="yes" ref={this.inputPromo} />
-              Yes, I want to receive promo notifications
-            </label>
+            <div className={styles.input_wrapper}>
+              <span>Name*</span>
+              <input
+                type="text"
+                className={`${styles.input_text} ${
+                  this.inputUserName.current?.validity.valid ? '' : styles.input_invalid
+                }`}
+                ref={this.inputUserName}
+              />
+            </div>
+            <span className={styles.error_message}>{this.state.errors['name']}</span>
           </div>
           <div>
-            <label>
-              <input type="radio" name="promo" value="no" ref={this.inputSales} />
-              {"No, I don't want to receive promo notifications"}
-            </label>
+            <div className={styles.input_wrapper}>
+              <span>Surame*</span>
+              <input
+                type="text"
+                className={`${styles.input_text} ${
+                  this.inputUserSurname.current?.validity.valid ? '' : styles.input_invalid
+                }`}
+                ref={this.inputUserSurname}
+              />
+            </div>
+            <span className={styles.error_message}>{this.state.errors['surname']}</span>
           </div>
-          <span className={styles.error_message}>{this.state.errors['promoValue']}</span>
-        </div>
+          <div>
+            <div className={styles.input_wrapper}>
+              <label htmlFor="country" className={styles.label}>
+                Country*:
+              </label>
+              <select
+                id="country"
+                ref={this.inputCountry}
+                onChange={this.handleSelectInput}
+                className={styles.select}
+              >
+                <option value="">-- Select a country --</option>
+                {countries.map((country) => (
+                  <option key={country} value={country}>
+                    {country}
+                  </option>
+                ))}
+              </select>
+            </div>
+            <span className={styles.error_message}>{this.state.errors['country']}</span>
+          </div>
+          <div>
+            <div className={styles.input_wrapper}>
+              <label className={styles.checkbox_container}>
+                <input type="checkbox" ref={this.inputConsent} />
+                <span className={styles.checkmark}></span>I consent to my personal data
+              </label>
+            </div>
+            <span className={styles.error_message}>{this.state.errors['consent']}</span>
+          </div>
+          {/* radio */}
 
-        <div className={styles.wrapper_file}>
-          <h3>Upload Profile Picture</h3>
-          <label htmlFor="profile-picture" className={styles.label_file}>
-            {profilePicture ? profilePicture.name : 'Choose file...'}
-          </label>
-          <input
-            type="file"
-            id="profile-picture"
-            ref={this.inputFile}
-            className={styles.input_file}
-            onChange={this.handleFileChange}
-          />
-        </div>
-        <button className={styles.button_submit} onClick={this.handleSubmit}>
-          Submit
-        </button>
+          <div className={styles.notification_form}>
+            <div>
+              <label>
+                <input type="radio" name="promo" value="yes" ref={this.inputPromo} />
+                Yes, I want to receive promo notifications
+              </label>
+            </div>
+            <div>
+              <label>
+                <input type="radio" name="promo" value="no" ref={this.inputSales} />
+                {"No, I don't want to receive promo notifications"}
+              </label>
+            </div>
+            <span className={styles.error_message}>{this.state.errors['promoValue']}</span>
+          </div>
+
+          <div className={styles.wrapper_file}>
+            <h3>Upload Profile Picture</h3>
+            <label htmlFor="profile-picture" className={styles.label_file}>
+              {profilePicture ? profilePicture.name : 'Choose file...'}
+            </label>
+            <input
+              type="file"
+              id="profile-picture"
+              ref={this.inputFile}
+              className={styles.input_file}
+              onChange={this.handleFileChange}
+            />
+          </div>
+          <button className={styles.button_submit} onClick={this.handleSubmit}>
+            Submit
+          </button>
+        </form>
       </div>
     );
   }
