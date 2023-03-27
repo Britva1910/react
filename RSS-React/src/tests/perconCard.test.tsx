@@ -7,6 +7,7 @@ const mockData = {
   surname: 'Doe',
   country: 'USA',
   file: 'image.png',
+  userDate: '12.12.12',
   consent: true,
   promoValue: false,
 };

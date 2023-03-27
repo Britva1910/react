@@ -69,7 +69,7 @@ export default class Form extends React.Component<FormProps, FormState> {
       country: this.inputCountry.current?.value,
       consent: this.inputConsent.current?.checked,
       promoValue: this.inputPromo.current?.checked,
-      date: this.inputDate.current?.value,
+      userDate: this.inputDate.current?.value,
       file:
         this.inputFile.current?.files?.length && this.inputFile.current?.files?.length > 0
           ? URL.createObjectURL(this.inputFile.current.files[0])
