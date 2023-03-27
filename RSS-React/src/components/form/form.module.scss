@@ -10,7 +10,7 @@
     margin-top: 30px;
     display: flex;
     align-items: center;
-    justify-content: space-around;
+    justify-content: space-between;
     span {
         margin-right: 20px;
         margin-bottom: 5px;
@@ -75,6 +75,16 @@
     margin: 10px auto;
     font-size: 10px;
     color: red;
+  }
+
+  .input_date {
+    max-width: 300px;
+    width: 100%;
+    padding: 10px;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+    font-size: 16px;
+    color: #333;
   }
 
   /* checkbox */

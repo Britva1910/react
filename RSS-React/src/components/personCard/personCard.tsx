@@ -26,6 +26,10 @@ export default class PersonCard extends React.Component<PersonCardProps, Record<
           <span>{this.props.data.surname}</span>
         </div>
         <div>
+          <span>Date: </span>
+          <span>{this.props.data.date}</span>
+        </div>
+        <div>
           <span>User country: </span>
           <span>{this.props.data.country}</span>
         </div>

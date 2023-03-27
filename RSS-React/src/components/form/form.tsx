@@ -33,6 +33,7 @@ export default class Form extends React.Component<FormProps, FormState> {
   inputPromo: RefObject<HTMLInputElement>;
   inputSales: RefObject<HTMLInputElement>;
   inputFile: RefObject<HTMLInputElement>;
+  inputDate: RefObject<HTMLInputElement>;
   form: RefObject<HTMLFormElement>;
 
   constructor(props: FormProps) {
@@ -53,6 +54,7 @@ export default class Form extends React.Component<FormProps, FormState> {
     this.inputPromo = React.createRef();
     this.inputSales = React.createRef();
     this.inputFile = React.createRef();
+    this.inputDate = React.createRef();
     this.form = React.createRef();
     this.handleSubmit = this.handleSubmit.bind(this);
     this.handleSelectInput = this.handleSelectInput.bind(this);
@@ -67,6 +69,7 @@ export default class Form extends React.Component<FormProps, FormState> {
       country: this.inputCountry.current?.value,
       consent: this.inputConsent.current?.checked,
       promoValue: this.inputPromo.current?.checked,
+      date: this.inputDate.current?.value,
       file:
         this.inputFile.current?.files?.length && this.inputFile.current?.files?.length > 0
           ? URL.createObjectURL(this.inputFile.current.files[0])
@@ -210,6 +213,19 @@ export default class Form extends React.Component<FormProps, FormState> {
                   this.inputUserSurname.current?.validity.valid ? '' : styles.input_invalid
                 }`}
                 ref={this.inputUserSurname}
+              />
+            </div>
+            <span className={styles.error_message}>{this.state.errors['surname']}</span>
+          </div>
+          <div>
+            <div className={styles.input_wrapper}>
+              <span>Date</span>
+              <input
+                type="date"
+                className={`${styles.input_date} ${
+                  this.inputDate.current?.validity.valid ? '' : styles.input_invalid
+                }`}
+                ref={this.inputDate}
               />
             </div>
             <span className={styles.error_message}>{this.state.errors['surname']}</span>
