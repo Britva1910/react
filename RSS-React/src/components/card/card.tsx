@@ -1,4 +1,4 @@
-import React, { Component } from 'react';
+import React from 'react';
 import styles from './card.module.scss';
 
 interface ICardData {
@@ -14,23 +14,23 @@ interface ICardData {
   imgURL: string;
 }
 
-export default class Card extends Component<ICardData> {
-  render() {
-    const { author, title, imgURL, year, language, pages } = this.props;
+const Card = (props: ICardData) => {
+  const { author, title, imgURL, year, language, pages } = props;
 
-    return (
-      <div className={styles.wrapper}>
-        <div>
-          <img src={imgURL} alt="img book" />
-        </div>
-        <div className={styles.title}>{title}</div>
-        <div className={styles.information_section}>
-          <span className={styles.author}>{author}</span>
-          <span>{year}</span>
-          <span>{language}</span>
-          <span>{pages}</span>
-        </div>
+  return (
+    <div className={styles.wrapper}>
+      <div>
+        <img src={imgURL} alt="img book" />
       </div>
-    );
-  }
-}
+      <div className={styles.title}>{title}</div>
+      <div className={styles.information_section}>
+        <span className={styles.author}>{author}</span>
+        <span>{year}</span>
+        <span>{language}</span>
+        <span>{pages}</span>
+      </div>
+    </div>
+  );
+};
+
+export default Card;

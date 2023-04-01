@@ -18,19 +18,19 @@ export interface ICardData {
   imgURL: string;
 }
 
-export default class MainPage extends React.Component {
-  listCards = booksData.map((item) => (
+const MainPage: React.FC = () => {
+  const listCards = booksData.map((item) => (
     <li key={item.ISBN}>
       <Card {...item} />
     </li>
   ));
 
-  render() {
-    return (
-      <div className={styles.container}>
-        <SearchBar />
-        <ul className={styles.wrapper}>{...this.listCards}</ul>
-      </div>
-    );
-  }
-}
+  return (
+    <div className={styles.container}>
+      <SearchBar />
+      <ul className={styles.wrapper}>{...listCards}</ul>
+    </div>
+  );
+};
+
+export default MainPage;
