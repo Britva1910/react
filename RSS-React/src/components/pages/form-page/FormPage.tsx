@@ -1,6 +1,6 @@
 import React from 'react';
-import Form from '../../form/form';
-import PersonCard from '../../personCard/personCard';
+import Form from '../../form/Form';
+import PersonCard from '../../personCard/PersonCard';
 import styles from './form-page.module.scss';
 import { IPersonCard } from '../../../shared/models';
 

@@ -1,6 +1,6 @@
 import React from 'react';
 import { render, screen, fireEvent } from '@testing-library/react';
-import SearchBar from '../components/search-bar/search-bar';
+import SearchBar from '../components/search-bar/SearchBar';
 
 test('SearchBar should update state value when text is entered', () => {
   const { getByRole } = render(<SearchBar />);

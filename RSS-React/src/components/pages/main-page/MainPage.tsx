@@ -1,9 +1,9 @@
 import React from 'react';
 import { booksData } from '../../../assets/mock-response';
-import SearchBar from '../../search-bar/search-bar';
+import SearchBar from '../../search-bar/SearchBar';
 import styles from './main-page.module.scss';
 
-import Card from '../../card/card';
+import Card from '../../card/Card';
 
 export interface ICardData {
   title: string;
