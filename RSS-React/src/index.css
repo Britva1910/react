@@ -1,0 +1,32 @@
+.modal_visible {
+  position: absolute;
+  left: calc(100vw / 2 - 300px);
+  top: calc(100vh / 2 - 100px);
+  background-color: bisque;
+}
+
+.modal_hidden {
+  display: none;
+}
+
+.modal_container {
+  width: 600px;
+  height: 200px;
+  position: relative;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background-color: bisque;
+  font-size: 3rem;
+  -webkit-box-shadow: 5px 5px 15px 5px rgba(0, 0, 0, 0.31);
+  box-shadow: 5px 5px 15px 5px rgba(0, 0, 0, 0.31);
+}
+
+.modal_button {
+  position: absolute;
+  bottom: 20px;
+  left: 275px;
+  width: 50px;
+  height: 20px;
+  background-color: rgb(186, 194, 191);
+}
