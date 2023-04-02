@@ -3,26 +3,26 @@ import { render } from '@testing-library/react';
 import PersonCard from '../components/personCard/PersonCard';
 
 const mockData = {
-  name: 'John',
-  surname: 'Doe',
+  firstName: 'John',
+  lastName: 'Doe',
   country: 'USA',
   file: 'image.png',
-  userDate: '12.12.12',
+  birthday: '12.12.12',
   consent: true,
-  promoValue: false,
+  promo: 'false',
 };
 
 describe('PersonCard component', () => {
   test('renders user name', () => {
     const { getByText } = render(<PersonCard data={mockData} />);
     const nameElement = getByText(/User name:/i);
-    expect(nameElement.nextSibling?.textContent).toBe(mockData.name);
+    expect(nameElement.nextSibling?.textContent).toBe(mockData.firstName);
   });
 
   test('renders user surname', () => {
     const { getByText } = render(<PersonCard data={mockData} />);
     const surnameElement = getByText(/User surname:/i);
-    expect(surnameElement.nextSibling?.textContent).toBe(mockData.surname);
+    expect(surnameElement.nextSibling?.textContent).toBe(mockData.lastName);
   });
 
   test('renders user country', () => {

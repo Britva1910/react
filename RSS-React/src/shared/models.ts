@@ -1,9 +1,9 @@
 export interface IPersonCard {
-  name: string | undefined;
-  surname: string | undefined;
-  userDate: string | undefined;
+  firstName: string | undefined;
+  lastName: string | undefined;
+  birthday: string | undefined;
   country: string | undefined;
   consent: boolean | undefined;
-  promoValue: boolean | undefined;
+  promo: string | undefined;
   file: string;
 }

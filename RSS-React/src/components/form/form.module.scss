@@ -1,202 +1,244 @@
 .wrapper {
-    max-width: 500px;
-    margin: 0 auto;
-    display: flex;
-    flex-direction: column;
-    
-} 
-
-.input_wrapper {
     margin-top: 30px;
-    display: flex;
-    align-items: center;
-    justify-content: space-between;
-    span {
-        margin-right: 20px;
-        margin-bottom: 5px;
-        font-size: 18px;
-        color: #666;
+    form {
+      max-width: 400px;
+      margin: 0 auto;
+      
+      div {
+        margin-bottom: 1rem;
+        
+        label {
+          margin-bottom: 0.5rem;
+          font-size: 2rem;
+          font-weight: bold;
+          color: grey;
+          
+          input {
+            margin-top: 5px;
+            display: inline;
+            width: 100%;
+            padding: 0.5rem;
+            border: 1px solid #ccc;
+            border-radius: 3px;
+            box-sizing: border-box;
+          }
+
+          select {
+            display: block;
+            margin-top: 5px;
+            width: 100%;
+            padding: 0.5rem;
+            border: 1px solid #ccc;
+            border-radius: 3px;
+            box-sizing: border-box;
+          }
+          
+          p {
+            margin-top: 0.5rem;
+            font-weight: normal;
+            color: red;
+          }
+        }
+      }
+     
+      input[type="submit"] {
+        display: block;
+        width: 100px;
+        height: 30px;
+        margin-top: 5rem;
+        padding: 0.5rem 1rem;
+        border: none;
+        border-radius: 3px;
+        background-color: #0077cc;
+        color: #fff;
+        cursor: pointer;
+        
+        &:hover {
+          background-color: #0066b3;
+        }
+    }
+  }
+
+  .container {
+      display: flex;
+      align-items: center;
+      margin-top: 1rem;
+      color: red
+    
+      &__label {
+        margin-left: 0.5rem;
+        font-size: 0.875rem;
+        color: #808080;
+      }
+    
+      &__input {
+        margin-right: 0.5rem;
+        appearance: none;
+        width: 1rem;
+        height: 1rem;
+        border: 1px solid #808080;
+        border-radius: 2px;
+        cursor: pointer;
+        transition: border-color 0.2s ease;
+    
+        &:checked {
+          background-color: #808080;
+          border-color: #808080;
+        }
+      }
+    
+      &__error {
+        margin-top: 0.5rem;
+        font-size: 0.75rem;
+        color: red;
+      }
     }
 }
 
-.input_text {
-    max-width: 300px;
-    width: 100%;
-    padding: 10px;
-    border: 1px solid #ccc;
-    border-radius: 5px;
-    font-size: 16px;
-    color: #333;
-    
-    &:focus {
-      outline: none;
-      border-color: blue;
-    }
-  }
+.checkbox_container {
+  display: block;
+  position: relative;
+  padding-left: 50px;
+  margin-top: 20px;
+  margin-bottom: 12px;
+  cursor: pointer;
+  font-size: 18px;
+  user-select: none;
+}
+.checkbox_container input {
+  position: absolute;
+  opacity: 0;
+  cursor: pointer;
+}
 
-  .input_invalid {
-    border-color: red;
-  }
+.checkmark {
+  position: absolute;
+  top: -2px;
+  left: 0;
+  height: 25px;
+  width: 25px;
+  background-color: #eee;
+  border-radius: 3px;
+}
 
-  .label {
-    margin-right: 20px;
-    margin-bottom: 5px;
-    font-size: 18px;
-    color: #666;
-  }
-  
-  .select {
-    max-width: 300px;
-    padding: 8px;
-    border-radius: 4px;
-    border: 1px solid gray;
-    font-size: 16px;
-  }
-  
-  
-  .button_submit {
-    max-width: 100px;
-    margin: 40px auto;
-    margin-bottom: 20px;
-    background-color: grey;
-    color: white;
-    padding: 10px 20px;
-    border-radius: 5px;
-    border: none;
-    
-    &:hover {
-      cursor: pointer;
-      background-color: darkgrey;
-    }
-  }
+.checkbox_container:hover input ~ .checkmark {
+  background-color: #ccc;
+}
 
-  .error_message {
-    display: table;
-    margin: 10px auto;
-    font-size: 10px;
-    color: red;
-  }
+.checkbox_container input:checked ~ .checkmark {
+  background-color: #2196f3;
+}
 
-  .input_date {
-    max-width: 300px;
-    width: 100%;
-    padding: 10px;
-    border: 1px solid #ccc;
-    border-radius: 5px;
-    font-size: 16px;
-    color: #333;
-  }
+.checkmark:after {
+  content: "";
+  position: absolute;
+  display: none;
+}
 
-  /* checkbox */
-  .checkbox_container {
-    display: block;
-    position: relative;
-    padding-left: 50px;
-    margin-bottom: 12px;
-    cursor: pointer;
-    font-size: 18px;
-    user-select: none;
-  }
-  
-  .checkbox_container input {
-    position: absolute;
-    opacity: 0;
-    cursor: pointer;
-  }
-  
-  .checkmark {
-    position: absolute;
-    top: -2px;
-    left: 0;
-    height: 25px;
-    width: 25px;
-    background-color: #eee;
-    border-radius: 3px;
-  }
-  
-  .checkbox_container:hover input ~ .checkmark {
-    background-color: #ccc;
-  }
-  
-  .checkbox_container input:checked ~ .checkmark {
-    background-color: #2196f3;
-  }
-  
-  .checkmark:after {
-    content: "";
-    position: absolute;
-    display: none;
-  }
-  
-  .checkbox_container input:checked ~ .checkmark:after {
-    display: block;
-  }
-  
-  .checkbox_container .checkmark:after {
-    left: 9px;
-    top: 5px;
-    width: 5px;
-    height: 10px;
-    border: solid white;
-    border-width: 0 3px 3px 0;
-    transform: rotate(45deg);
-  }
- 
-  .notification_form {
-    margin: 30px auto;
-    label {
-      display: block;
-      margin-bottom: 10px;
-      font-size: 16px;
-    }
-  
-    input[type="radio"] {
-      margin-right: 10px;
-      vertical-align: middle;
-    }
-  
-    input[type="radio"]:checked + label {
-      color: blue;
-    }
-  }
-  
+.checkbox_container input:checked ~ .checkmark:after {
+  display: block;
+}
 
-  .wrapper_file {
-    width: 100%;
+.checkbox_container .checkmark:after {
+  left: 9px;
+  top: 5px;
+  width: 5px;
+  height: 10px;
+  border: solid white;
+  border-width: 0 3px 3px 0;
+  transform: rotate(45deg);
+}
+
+.radio_group {
+  display: flex;
+  flex-direction: column;
+  margin-bottom: 1rem;
+
+  label {
     display: flex;
-    flex-direction: column;
     align-items: center;
-  }
-  
-  .label_file {
-    width: 200px;
-    display: block;
     font-size: 1rem;
     margin-bottom: 0.5rem;
-    padding: 0.5rem;
-    border: 2px solid #ccc;
-    border-radius: 0.5rem;
     cursor: pointer;
-    text-align: center;
+
+    input[type="radio"] {
+      appearance: none;
+      margin-right: 0.5rem;
+      width: 1rem;
+      height: 1rem;
+      border: 1px solid grey;
+      border-radius: 50%;
+      outline: none;
+      transition: border-color 0.2s ease-in-out;
+
+      &:checked {
+        border-color: blue;
+      }
+
+      &:hover {
+        border-color: black;
+      }
+    }
   }
-  
-  .input_file {
-    display: none;
+}
+
+.notification_form {
+  margin: 30px auto;
+  label {
+    display: flex;
+    margin-bottom: 10px;
+    font-size: 16px;
   }
-  
-  .button_file {
-    margin-top: 1rem;
-    background-color: #0077ff;
-    color: #fff;
-    font-size: 1rem;
-    padding: 0.5rem 1rem;
-    border: none;
-    border-radius: 0.5rem;
-    cursor: pointer;
-    transition: background-color 0.2s ease;
+
+  input[type="radio"] {
+    display: inline;
+    margin-right: 10px;
+    height: 20px;
+    width: 20px;
+    vertical-align: middle;
   }
-  
-  .button_file:hover {
-    background-color: #0066cc;
+
+  input[type="radio"]:checked + label {
+    color: blue;
   }
-  
+}
+
+.error_msg {
+  margin-top: 0.5rem;
+  font-size: 0.75rem;
+  color: red;
+}
+
+.wrapper_file {
+  margin-top: 50px;
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  h3 {
+    font-size: 0.875rem;
+    color: #808080;
+    font-size: 2rem;
+  }
+}
+
+.input_file { 
+  height: 30px;
+  width: 300px;
+}
+
+.button_file {
+  margin-top: 1rem;
+  background-color: #0077ff;
+  color: #fff;
+  font-size: 1rem;
+  padding: 0.5rem 1rem;
+  border: none;
+  border-radius: 0.5rem;
+  cursor: pointer;
+  transition: background-color 0.2s ease;
+}
+
+.button_file:hover {
+  background-color: #0066cc;
+}

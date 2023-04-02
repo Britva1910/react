@@ -16,6 +16,11 @@ export default class FormPage extends React.Component<Record<string, never>, For
   }
 
   updateStateFormPage(value: IPersonCard) {
+    const file = value.file?.[0];
+    if (file) {
+      const blob = new Blob([file], { type: 'application/pdf' });
+      value.file = URL.createObjectURL(blob);
+    }
     this.setState((prevState) => ({
       cards: [...prevState.cards, value],
     }));
