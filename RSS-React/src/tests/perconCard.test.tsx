@@ -9,7 +9,7 @@ const mockData = {
   file: 'image.png',
   birthday: '12.12.12',
   consent: true,
-  promo: 'false',
+  promo: 'Yes',
 };
 
 describe('PersonCard component', () => {
@@ -40,6 +40,6 @@ describe('PersonCard component', () => {
   test('renders promo notifications', () => {
     const { getByText } = render(<PersonCard data={mockData} />);
     const promoElement = getByText(/Promo notifications:/i);
-    expect(promoElement.nextSibling?.textContent).toBe('No');
+    expect(promoElement.nextSibling?.textContent).toBe('Yes');
   });
 });
