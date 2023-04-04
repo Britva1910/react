@@ -1,9 +1,9 @@
-import React from 'react';
+import React, { useEffect, useState } from 'react';
 import { booksData } from '../../../assets/mock-response';
 import SearchBar from '../../search-bar/SearchBar';
 import styles from './main-page.module.scss';
 
-import Card from '../../card/Card';
+import { IImageData, IResponseSearchByWord } from '../../../shared/models';
 
 export interface ICardData {
   title: string;
@@ -19,16 +19,22 @@ export interface ICardData {
 }
 
 const MainPage: React.FC = () => {
-  const listCards = booksData.map((item) => (
-    <li key={item.ISBN}>
-      <Card {...item} />
-    </li>
-  ));
+  const [searchData, setSearchData] = useState<IResponseSearchByWord>({
+    results: [],
+    total: null,
+    total_pages: null,
+  });
+
+  useEffect(() => {
+    console.log(searchData);
+  });
+
+  const list = searchData.results.map((item) => <img key={item.id} src={item.urls.small} />);
 
   return (
     <div className={styles.container}>
-      <SearchBar />
-      <ul className={styles.wrapper}>{...listCards}</ul>
+      <SearchBar setResponse={setSearchData} />
+      <div>{list.length > 0 ? list : 'Please use search!'}</div>
     </div>
   );
 };

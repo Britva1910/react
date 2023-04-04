@@ -7,3 +7,30 @@ export interface IPersonCard {
   promo: string | undefined;
   file: string;
 }
+
+export interface IResponseSearchByWord {
+  results: IImageData[];
+  total: number | null;
+  total_pages: number | null;
+}
+export interface IImageData {
+  alt_description: string | null;
+  urls: IImageUrls;
+  user: IUserData;
+  likes: string;
+  promoted_at: string;
+  downloads: number;
+  id: string;
+  views: number;
+}
+
+interface IImageUrls {
+  full: string;
+  raw: string;
+  regular: string;
+  small: string;
+}
+
+interface IUserData {
+  name: string;
+}
