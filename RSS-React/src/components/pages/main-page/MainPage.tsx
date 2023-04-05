@@ -5,19 +5,6 @@ import styles from './main-page.module.scss';
 
 import { IImageData, IResponseSearchByWord } from '../../../shared/models';
 
-export interface ICardData {
-  title: string;
-  author: string;
-  publisher: string;
-  year: number;
-  ISBN: string;
-  language: string;
-  format: string;
-  pages: number;
-  category: string;
-  imgURL: string;
-}
-
 const MainPage: React.FC = () => {
   const [searchData, setSearchData] = useState<IResponseSearchByWord>({
     results: [],
