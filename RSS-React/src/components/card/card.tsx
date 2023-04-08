@@ -1,34 +1,30 @@
 import React from 'react';
 import styles from './card.module.scss';
+import { IImageData } from '../../shared/models';
+import { faHeart, faTags } from '@fortawesome/free-solid-svg-icons';
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 
-interface ICardData {
-  title: string;
-  author: string;
-  publisher: string;
-  year: number;
-  ISBN: string;
-  language: string;
-  format: string;
-  pages: number;
-  category: string;
-  imgURL: string;
-}
+type CardProps = {
+  cardData: IImageData;
+  key: string;
+  handleModalWindow: (id: string | undefined, status: boolean) => void;
+};
 
-const Card = (props: ICardData) => {
-  const { author, title, imgURL, year, language, pages } = props;
-
+const Card: React.FC<CardProps> = ({ cardData, handleModalWindow }) => {
   return (
-    <div className={styles.wrapper}>
+    <div className={styles.wrapper} onClick={() => handleModalWindow(cardData.id, true)}>
+      <img src={cardData.urls.small} alt="card_image" />
+      <div>{cardData.promoted_at}</div>
+      <div>{cardData.alt_description}</div>
+      <div>{cardData.user.name}</div>
       <div>
-        <img src={imgURL} alt="img book" />
+        <FontAwesomeIcon icon={faHeart} />
+        <span>{cardData.likes}</span>
       </div>
-      <div className={styles.title}>{title}</div>
-      <div className={styles.information_section}>
-        <span className={styles.author}>{author}</span>
-        <span>{year}</span>
-        <span>{language}</span>
-        <span>{pages}</span>
+      {/*       <div>
+        <FontAwesomeIcon icon={faTags} />
       </div>
+ */}{' '}
     </div>
   );
 };

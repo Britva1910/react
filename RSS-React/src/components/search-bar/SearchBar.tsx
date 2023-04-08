@@ -22,7 +22,15 @@ const SearchBar: React.FC<SearchBarProps> = ({ setResponse }) => {
   };
 
   const getDataByInput = () => {
-    axios
+    fetch('../../../public/response.json')
+      .then((response) => response.json())
+      .then((response) => {
+        setResponse(response);
+      })
+      .catch((error) => console.error(error));
+
+    //TODO - change after create layout
+    /* axios
       .get<IResponseSearchByWord>(
         `https://api.unsplash.com/search/photos?client_id=xJGDNkDt7wD9WsFgcHle9TXtWZKQRC7NLv6-rfAO8lY&query=${userInputData}`
       )
@@ -31,7 +39,7 @@ const SearchBar: React.FC<SearchBarProps> = ({ setResponse }) => {
 
         setResponse(response.data);
       })
-      .catch((e) => console.log(e)); //TODO - write error message
+      .catch((e) => console.log(e)); //TODO - write error message */
   };
 
   return (

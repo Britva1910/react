@@ -3,7 +3,10 @@ import { booksData } from '../../../assets/mock-response';
 import SearchBar from '../../search-bar/SearchBar';
 import styles from './main-page.module.scss';
 
-import { IImageData, IResponseSearchByWord } from '../../../shared/models';
+import { IResponseSearchByWord } from '../../../shared/models';
+import Card from '../../card/Card';
+import { faTimes } from '@fortawesome/free-solid-svg-icons';
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 
 const MainPage: React.FC = () => {
   const [searchData, setSearchData] = useState<IResponseSearchByWord>({
@@ -11,18 +14,37 @@ const MainPage: React.FC = () => {
     total: null,
     total_pages: null,
   });
+  const [modalWindowStatus, setModalWindowStatus] = useState(false);
 
-  useEffect(() => {
-    console.log(searchData);
-  });
+  useEffect(() => {});
 
-  const list = searchData.results.map((item) => <img key={item.id} src={item.urls.small} />);
+  const handleModalWindow = (id: string | undefined, status: boolean) => {
+    setModalWindowStatus(status);
+  };
+
+  const list = searchData.results.map((item) => (
+    <Card cardData={item} key={item.id} handleModalWindow={handleModalWindow} />
+  ));
 
   return (
-    <div className={styles.container}>
-      <SearchBar setResponse={setSearchData} />
-      <div>{list.length > 0 ? list : 'Please use search!'}</div>
-    </div>
+    <>
+      <div className={styles.container}>
+        <SearchBar setResponse={setSearchData} />
+        <div className={styles.wrapper}>{...list}</div>
+      </div>
+      {modalWindowStatus && (
+        <>
+          <div
+            className={styles.modal__bg}
+            onClick={() => handleModalWindow(undefined, false)}
+          ></div>
+          <div>
+            <div className={styles.modal__body}>Modal page</div>
+            <FontAwesomeIcon icon={faTimes} />
+          </div>
+        </>
+      )}
+    </>
   );
 };
 
