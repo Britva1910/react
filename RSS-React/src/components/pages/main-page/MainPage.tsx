@@ -1,12 +1,13 @@
 import React, { useEffect, useState } from 'react';
-import { booksData } from '../../../assets/mock-response';
 import SearchBar from '../../search-bar/SearchBar';
 import styles from './main-page.module.scss';
-
-import { IResponseSearchByWord } from '../../../shared/models';
+import { IImageData, IResponseSearchByWord } from '../../../shared/models';
 import Card from '../../card/Card';
 import { faTimes } from '@fortawesome/free-solid-svg-icons';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
+import { Loader } from '../../loader/Loader';
+import axios from 'axios';
+import DetailInformation from './components/detailInformation/DetailInformation';
 
 const MainPage: React.FC = () => {
   const [searchData, setSearchData] = useState<IResponseSearchByWord>({
@@ -15,11 +16,29 @@ const MainPage: React.FC = () => {
     total_pages: null,
   });
   const [modalWindowStatus, setModalWindowStatus] = useState(false);
+  const [activeCardId, setActiveCardId] = useState<string>();
+  const [loading, setLoading] = useState(false);
 
   useEffect(() => {});
 
   const handleModalWindow = (id: string | undefined, status: boolean) => {
     setModalWindowStatus(status);
+    if (id) {
+      setActiveCardId(id);
+    }
+  };
+
+  const getDataByInput = (userInput: string) => {
+    setLoading(true);
+    axios
+      .get<IResponseSearchByWord>(
+        `https://api.unsplash.com/search/photos?client_id=xJGDNkDt7wD9WsFgcHle9TXtWZKQRC7NLv6-rfAO8lY&query=${userInput}&orientation=landscape`
+      )
+      .then((response) => {
+        setSearchData(response.data);
+        setTimeout(() => setLoading(false), 1000);
+      })
+      .catch((e) => console.log(e));
   };
 
   const list = searchData.results.map((item) => (
@@ -29,19 +48,20 @@ const MainPage: React.FC = () => {
   return (
     <>
       <div className={styles.container}>
-        <SearchBar setResponse={setSearchData} />
-        <div className={styles.wrapper}>{...list}</div>
+        <SearchBar setUserInput={getDataByInput} />
+        {!loading && <div className={styles.wrapper}>{...list}</div>}
       </div>
+      {loading && (
+        <div>
+          <Loader />
+        </div>
+      )}
       {modalWindowStatus && (
         <>
-          <div
-            className={styles.modal__bg}
-            onClick={() => handleModalWindow(undefined, false)}
-          ></div>
-          <div>
-            <div className={styles.modal__body}>Modal page</div>
-            <FontAwesomeIcon icon={faTimes} />
-          </div>
+          <DetailInformation
+            handleModalWindow={handleModalWindow}
+            currentPictureId={activeCardId}
+          />
         </>
       )}
     </>

@@ -4,10 +4,10 @@ import axios from 'axios';
 import { IResponseSearchByWord } from '../../shared/models';
 
 type SearchBarProps = {
-  setResponse: (response: IResponseSearchByWord) => void;
+  setUserInput: (userInput: string) => void;
 };
 
-const SearchBar: React.FC<SearchBarProps> = ({ setResponse }) => {
+const SearchBar: React.FC<SearchBarProps> = ({ setUserInput }) => {
   const inputValueFromLocalStorage: string | null = localStorage.getItem('input');
   const [userInputData, setUserInputData] = useState<string>(
     inputValueFromLocalStorage !== null ? inputValueFromLocalStorage : ''
@@ -21,27 +21,6 @@ const SearchBar: React.FC<SearchBarProps> = ({ setResponse }) => {
     setUserInputData(event.target.value);
   };
 
-  const getDataByInput = () => {
-    fetch('../../../public/response.json')
-      .then((response) => response.json())
-      .then((response) => {
-        setResponse(response);
-      })
-      .catch((error) => console.error(error));
-
-    //TODO - change after create layout
-    /* axios
-      .get<IResponseSearchByWord>(
-        `https://api.unsplash.com/search/photos?client_id=xJGDNkDt7wD9WsFgcHle9TXtWZKQRC7NLv6-rfAO8lY&query=${userInputData}`
-      )
-      .then((response) => {
-        //console.log(response.data);
-
-        setResponse(response.data);
-      })
-      .catch((e) => console.log(e)); //TODO - write error message */
-  };
-
   return (
     <div className={styles.wrapper}>
       <input
@@ -51,7 +30,7 @@ const SearchBar: React.FC<SearchBarProps> = ({ setResponse }) => {
         type="text"
         onChange={handleChange}
       />
-      <button onClick={getDataByInput}>Search</button>
+      <button onClick={() => setUserInput(userInputData)}>Search</button>
     </div>
   );
 };

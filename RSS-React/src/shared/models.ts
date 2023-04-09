@@ -22,6 +22,7 @@ export interface IImageData {
   downloads: number;
   id: string;
   views: number;
+  tags_preview: Tags[];
 }
 
 interface IImageUrls {
@@ -33,4 +34,9 @@ interface IImageUrls {
 
 interface IUserData {
   name: string;
+}
+
+interface Tags {
+  type: string;
+  title: string;
 }
