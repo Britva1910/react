@@ -10,7 +10,13 @@ export default defineConfig({
     setupFiles: './src/tests/setup.ts',
     coverage: {
       include: ['src/**/*.{ts,tsx}'],
-      exclude: ['src/utils/*', 'src/vite-env.d.ts', 'src/main.tsx', 'src/shared/models.ts'],
+      exclude: [
+        'src/utils/*',
+        'src/vite-env.d.ts',
+        'src/main.tsx',
+        'src/shared/models.ts',
+        'src/tests',
+      ],
       reporter: ['text', 'json', 'html'],
       all: true,
       lines: 80,

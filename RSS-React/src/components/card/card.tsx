@@ -21,10 +21,6 @@ const Card: React.FC<CardProps> = ({ cardData, handleModalWindow }) => {
         <FontAwesomeIcon icon={faHeart} />
         <span>{cardData.likes}</span>
       </div>
-      {/*       <div>
-        <FontAwesomeIcon icon={faTags} />
-      </div>
- */}{' '}
     </div>
   );
 };

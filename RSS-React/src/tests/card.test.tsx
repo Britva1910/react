@@ -1,31 +1,27 @@
-//import { describe, test, expect } from 'vitest';
-import { render, screen } from '@testing-library/react';
+import React from 'react';
+import { render, fireEvent } from '@testing-library/react';
 import Card from '../components/card/Card';
 
 describe('Card component', () => {
-  test('renders card information', () => {
-    render(
-      <Card
-        author="John Doe"
-        title="Example Book"
-        imgURL="https://example.com/book.jpg"
-        year={2022}
-        language="English"
-        pages={200}
-        publisher="Microsoft Press"
-        ISBN="978-0735619678"
-        format="Paperback"
-        category="Software Engineering"
-      />
-    );
+  const cardData = {
+    alt_description: 'test',
+    urls: {
+      small: 'url',
+    },
+    user: {
+      name: 'test-name',
+    },
+    likes: '10',
+    promoted_at: '2022-04-09T00:00:00.000Z',
+    downloads: 5,
+    id: '1234',
+    views: 50,
+    tags_preview: ['tag1', 'tag2'],
+  };
 
-    const titleElement = screen.getByText(/Example Book/i);
-    expect(titleElement).toBeInTheDocument();
-
-    const authorElement = screen.getByText(/John Doe/i);
-    expect(authorElement).toBeInTheDocument();
-
-    const imgElement = screen.getByAltText(/img book/i);
-    expect(imgElement).toHaveAttribute('src', 'https://example.com/book.jpg');
+  it('should render the component', () => {
+    const { getByAltText, getByText } = render(<Card cardData={cardData} />);
+    expect(getByAltText('card_image')).toBeInTheDocument();
+    expect(getByText('test')).toBeInTheDocument();
   });
 });
