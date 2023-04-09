@@ -18,7 +18,7 @@ function DetailInformation(props: IDetailInformationProps) {
 
   useEffect(() => {
     axios
-      .get<IResponseSearchByWord>(
+      .get<IImageData>(
         `https://api.unsplash.com/photos/${props.currentPictureId}?client_id=xJGDNkDt7wD9WsFgcHle9TXtWZKQRC7NLv6-rfAO8lY`
       )
       .then((response) => {
@@ -26,10 +26,8 @@ function DetailInformation(props: IDetailInformationProps) {
         setTimeout(() => setLoading(false), 1000);
       })
       .catch((e) => console.log(e));
-    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
 
-  // eslint-disable-next-line react/jsx-key
   const tagsList = currentCardData?.tags_preview.map((item, index) => (
     <li key={index.toString()}>{item.title}</li>
   ));

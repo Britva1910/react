@@ -7,6 +7,9 @@ describe('Card component', () => {
     alt_description: 'test',
     urls: {
       small: 'url',
+      full: 'url',
+      raw: 'url',
+      regular: 'url',
     },
     user: {
       name: 'test-name',
@@ -16,11 +19,22 @@ describe('Card component', () => {
     downloads: 5,
     id: '1234',
     views: 50,
-    tags_preview: ['tag1', 'tag2'],
+    tags_preview: [
+      { type: 'test', title: 'tag1' },
+      { type: 'test', title: 'tag2' },
+    ],
   };
 
   it('should render the component', () => {
-    const { getByAltText, getByText } = render(<Card cardData={cardData} />);
+    const { getByAltText, getByText } = render(
+      <Card
+        cardData={cardData}
+        key={''}
+        handleModalWindow={function (): void {
+          throw new Error('Function not implemented.');
+        }}
+      />
+    );
     expect(getByAltText('card_image')).toBeInTheDocument();
     expect(getByText('test')).toBeInTheDocument();
   });

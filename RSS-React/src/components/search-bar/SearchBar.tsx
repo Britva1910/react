@@ -1,7 +1,7 @@
 import React, { ChangeEvent, useEffect, useState } from 'react';
 import styles from '../search-bar/search-bar.module.scss';
 
-type SearchBarProps = {
+export type SearchBarProps = {
   setUserInput: (userInput: string) => void;
 };
 

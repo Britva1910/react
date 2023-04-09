@@ -6,7 +6,7 @@ describe('ModalPage', () => {
     const closePage = () => {};
     const modalVisible = true;
 
-    render(<ModalPage closePage={closePage} modalVisible={modalVisible} />);
+    render(<ModalPage />);
 
     const okButton = screen.getByText('Ok');
     expect(okButton).toBeInTheDocument();
