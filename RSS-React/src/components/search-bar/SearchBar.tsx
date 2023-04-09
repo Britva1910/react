@@ -1,7 +1,5 @@
 import React, { ChangeEvent, useEffect, useState } from 'react';
 import styles from '../search-bar/search-bar.module.scss';
-import axios from 'axios';
-import { IResponseSearchByWord } from '../../shared/models';
 
 type SearchBarProps = {
   setUserInput: (userInput: string) => void;

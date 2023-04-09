@@ -26,6 +26,7 @@ function DetailInformation(props: IDetailInformationProps) {
         setTimeout(() => setLoading(false), 1000);
       })
       .catch((e) => console.log(e));
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
 
   // eslint-disable-next-line react/jsx-key

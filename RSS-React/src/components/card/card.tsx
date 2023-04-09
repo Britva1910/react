@@ -1,7 +1,7 @@
 import React from 'react';
 import styles from './card.module.scss';
 import { IImageData } from '../../shared/models';
-import { faHeart, faTags } from '@fortawesome/free-solid-svg-icons';
+import { faHeart } from '@fortawesome/free-solid-svg-icons';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 
 type CardProps = {

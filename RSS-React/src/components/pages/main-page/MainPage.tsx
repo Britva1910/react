@@ -1,10 +1,8 @@
 import React, { useEffect, useState } from 'react';
 import SearchBar from '../../search-bar/SearchBar';
 import styles from './main-page.module.scss';
-import { IImageData, IResponseSearchByWord } from '../../../shared/models';
+import { IResponseSearchByWord } from '../../../shared/models';
 import Card from '../../card/Card';
-import { faTimes } from '@fortawesome/free-solid-svg-icons';
-import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { Loader } from '../../loader/Loader';
 import axios from 'axios';
 import DetailInformation from './components/detailInformation/DetailInformation';
