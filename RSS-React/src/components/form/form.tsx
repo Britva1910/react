@@ -130,7 +130,7 @@ const Form: React.FC<IFormProps> = (props) => {
             {errors?.file && <p>{errors?.file?.message as string}</p>}
           </div>
         </div>
-        <input type="submit" value="Submit" />
+        <input role="btn_submit" type="submit" value="Submit" />
       </form>
     </div>
   );
