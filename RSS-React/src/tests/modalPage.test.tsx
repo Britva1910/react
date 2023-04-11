@@ -9,7 +9,6 @@ describe('ModalPage', () => {
 
   it('renders the modal page with the expected content', () => {
     const closePage = vi.fn();
-    const modalVisible = true;
 
     render(<ModalPage />);
 

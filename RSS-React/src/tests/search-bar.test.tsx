@@ -2,7 +2,7 @@ import React from 'react';
 import { render, screen, fireEvent } from '@testing-library/react';
 import SearchBar from '../components/search-bar/SearchBar';
 
-const setUserInput = (userInput: string) => {};
+const setUserInput = () => {};
 
 test('SearchBar should update state value when text is entered', () => {
   const { getByRole } = render(<SearchBar setUserInput={setUserInput} />);

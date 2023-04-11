@@ -5,7 +5,7 @@ import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { useEffect, useState } from 'react';
 import axios from 'axios';
 import { Loader } from '../../../../loader/Loader';
-import { IImageData, IResponseSearchByWord } from '../../../../../shared/models';
+import { IImageData } from '../../../../../shared/models';
 
 export interface IDetailInformationProps {
   handleModalWindow: (id: string | undefined, status: boolean) => void;
@@ -26,7 +26,7 @@ function DetailInformation(props: IDetailInformationProps) {
         setTimeout(() => setLoading(false), 1000);
       })
       .catch((e) => console.log(e));
-  }, []);
+  }, [props.currentPictureId]);
 
   const tagsList = currentCardData?.tags_preview.map((item, index) => (
     <li key={index.toString()}>{item.title}</li>
