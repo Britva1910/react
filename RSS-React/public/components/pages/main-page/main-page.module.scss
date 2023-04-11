@@ -1,0 +1,16 @@
+.container {
+    background-color: #ebeaea;
+ 
+}
+
+.wrapper {
+    margin: 0 auto;
+    max-width: 1200px;
+    margin-bottom: 40px;
+    display: flex;
+    justify-content: space-around;
+    flex-wrap: wrap;
+    li {
+        list-style-type: none;
+    }
+}

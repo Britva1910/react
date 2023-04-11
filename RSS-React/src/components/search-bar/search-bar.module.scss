@@ -1,0 +1,18 @@
+.wrapper {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  background-color: #ebeaea;
+  button {
+    height: 25px;
+    padding: 2px 10px;
+    font-size: 14px;
+    background-color: darkgrey;
+  }
+}
+
+.input {
+  width: 200px;
+  height: 25px;
+  padding: 10px;
+}
