@@ -1,19 +1,16 @@
-import React, { useEffect, useState } from 'react';
+import React, { useState } from 'react';
 import SearchBar from '../../search-bar/SearchBar';
 import styles from './main-page.module.scss';
-import { IResponseSearchByWord } from '../../../shared/models';
 import Card from '../../card/Card';
 import { Loader } from '../../loader/Loader';
 import DetailInformation from './components/detailInformation/DetailInformation';
 import { imageAPI } from '../../../services/ImagesService';
+import { useAppSelector } from '../../../store/reducers/redux';
 
 const MainPage: React.FC = () => {
   const [modalWindowStatus, setModalWindowStatus] = useState(false);
   const [activeCardId, setActiveCardId] = useState<string>();
   const [inputValue, setInputValue] = useState('');
-  const [loading, setLoading] = useState(false);
-
-  useEffect(() => {});
 
   const handleModalWindow = (id: string | undefined, status: boolean) => {
     setModalWindowStatus(status);
@@ -38,7 +35,7 @@ const MainPage: React.FC = () => {
         <SearchBar setUserInput={getDataByInput} />
         {list && <div className={styles.wrapper}>{...list}</div>}
       </div>
-      {loading && (
+      {isLoading && (
         <div>
           <Loader />
         </div>

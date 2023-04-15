@@ -1,5 +1,7 @@
 import React, { ChangeEvent, useEffect, useState } from 'react';
 import styles from '../search-bar/search-bar.module.scss';
+import { useAppDispatch, useAppSelector } from '../../store/reducers/redux';
+import { searchSlice } from '../../store/reducers/searchData';
 
 export type SearchBarProps = {
   setUserInput: (userInput: string) => void;
@@ -11,8 +13,12 @@ const SearchBar: React.FC<SearchBarProps> = ({ setUserInput }) => {
     inputValueFromLocalStorage !== null ? inputValueFromLocalStorage : ''
   );
 
+  const { userInput } = useAppSelector((state) => state.searchReducer);
+  const { setUserInputText } = searchSlice.actions;
+  const dispatch = useAppDispatch();
+
   useEffect(() => {
-    localStorage.setItem('input', userInputData);
+    dispatch(setUserInputText(userInputData));
   }, [userInputData]);
 
   const handleChange = (event: ChangeEvent<HTMLInputElement>): void => {
@@ -22,7 +28,7 @@ const SearchBar: React.FC<SearchBarProps> = ({ setUserInput }) => {
   return (
     <div className={styles.wrapper}>
       <input
-        defaultValue={userInputData}
+        defaultValue={userInput}
         className={styles.input}
         placeholder="search"
         type="text"

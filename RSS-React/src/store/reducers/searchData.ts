@@ -1,20 +1,21 @@
-import { IImageData } from '../../shared/models';
-import { createSlice } from '@reduxjs/toolkit';
+import { PayloadAction, createSlice } from '@reduxjs/toolkit';
 
 interface SearchState {
   userInput: string;
-  searchResult: IImageData[];
 }
 
 const initialState: SearchState = {
   userInput: '',
-  searchResult: [],
 };
 
 export const searchSlice = createSlice({
   name: 'search',
   initialState,
-  reducers: {},
+  reducers: {
+    setUserInputText(state, action: PayloadAction<string>) {
+      state.userInput = action.payload;
+    },
+  },
 });
 
 export default searchSlice.reducer;
