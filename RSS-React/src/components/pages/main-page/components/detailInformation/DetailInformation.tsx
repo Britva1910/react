@@ -2,21 +2,23 @@ import * as React from 'react';
 import styles from './detailInformation.module.scss';
 import { faTimes } from '@fortawesome/free-solid-svg-icons';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-import { useEffect, useState } from 'react';
-import axios from 'axios';
+import { useState } from 'react';
 import { Loader } from '../../../../loader/Loader';
 import { IImageData } from '../../../../../shared/models';
+import { imageAPI } from '../../../../../services/ImagesService';
 
 export interface IDetailInformationProps {
   handleModalWindow: (id: string | undefined, status: boolean) => void;
-  currentPictureId: string | undefined;
+  currentPictureId: string;
 }
 
 function DetailInformation(props: IDetailInformationProps) {
   const [currentCardData, setCurrentCardData] = useState<IImageData>();
   const [loading, setLoading] = useState(true);
 
-  useEffect(() => {
+  const { data, isLoading } = imageAPI.useFetchImageByIDQuery(props.currentPictureId);
+
+  /* useEffect(() => {
     axios
       .get<IImageData>(
         `https://api.unsplash.com/photos/${props.currentPictureId}?client_id=xJGDNkDt7wD9WsFgcHle9TXtWZKQRC7NLv6-rfAO8lY`
@@ -26,7 +28,7 @@ function DetailInformation(props: IDetailInformationProps) {
         setTimeout(() => setLoading(false), 1000);
       })
       .catch((e) => console.log(e));
-  }, [props.currentPictureId]);
+  }, [props.currentPictureId]); */
 
   const tagsList = currentCardData?.tags_preview.map((item, index) => (
     <li key={index.toString()}>{item.title}</li>
@@ -38,12 +40,12 @@ function DetailInformation(props: IDetailInformationProps) {
         className={styles.modal__bg}
         onClick={() => props.handleModalWindow(undefined, false)}
       ></div>
-      {loading && (
+      {isLoading && (
         <div>
           <Loader />
         </div>
       )}
-      {!loading && (
+      {!isLoading && (
         <div className={styles.modal}>
           <div className={styles.modal__body}>
             <span className={styles.btn__close}>
@@ -53,13 +55,13 @@ function DetailInformation(props: IDetailInformationProps) {
                 onClick={() => props.handleModalWindow(undefined, false)}
               />
             </span>
-            <img src={currentCardData?.urls.regular} alt="image" />
+            <img src={data?.urls.regular} alt="image" />
             <div className={styles.modal__information}>
-              <div>{currentCardData?.alt_description}</div>
-              <div>{`Views: ${currentCardData?.views}`}</div>
-              <div>{`Likes: ${currentCardData?.likes}`}</div>
-              <div>{`Publication date: ${currentCardData?.promoted_at}`}</div>
-              <div>{`Author: ${currentCardData?.user.name}`}</div>
+              <div>{data?.alt_description}</div>
+              <div>{`Views: ${data?.views}`}</div>
+              <div>{`Likes: ${data?.likes}`}</div>
+              <div>{`Publication date: ${data?.promoted_at}`}</div>
+              <div>{`Author: ${data?.user.name}`}</div>
               <ul className={styles.modal__tags}>Tags: {tagsList}</ul>
             </div>
           </div>

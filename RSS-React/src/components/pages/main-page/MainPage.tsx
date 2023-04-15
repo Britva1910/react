@@ -4,17 +4,13 @@ import styles from './main-page.module.scss';
 import { IResponseSearchByWord } from '../../../shared/models';
 import Card from '../../card/Card';
 import { Loader } from '../../loader/Loader';
-import axios from 'axios';
 import DetailInformation from './components/detailInformation/DetailInformation';
+import { imageAPI } from '../../../services/ImagesService';
 
 const MainPage: React.FC = () => {
-  const [searchData, setSearchData] = useState<IResponseSearchByWord>({
-    results: [],
-    total: null,
-    total_pages: null,
-  });
   const [modalWindowStatus, setModalWindowStatus] = useState(false);
   const [activeCardId, setActiveCardId] = useState<string>();
+  const [inputValue, setInputValue] = useState('');
   const [loading, setLoading] = useState(false);
 
   useEffect(() => {});
@@ -26,20 +22,13 @@ const MainPage: React.FC = () => {
     }
   };
 
+  const { data, error, isLoading } = imageAPI.useFetchImagesByWordQuery(inputValue);
+
   const getDataByInput = (userInput: string) => {
-    setLoading(true);
-    axios
-      .get<IResponseSearchByWord>(
-        `https://api.unsplash.com/search/photos?client_id=xJGDNkDt7wD9WsFgcHle9TXtWZKQRC7NLv6-rfAO8lY&query=${userInput}&orientation=landscape`
-      )
-      .then((response) => {
-        setSearchData(response.data);
-        setTimeout(() => setLoading(false), 1000);
-      })
-      .catch((e) => console.log(e));
+    setInputValue(userInput);
   };
 
-  const list = searchData.results.map((item) => (
+  const list = data?.results.map((item) => (
     <Card cardData={item} key={item.id} handleModalWindow={handleModalWindow} />
   ));
 
@@ -47,7 +36,7 @@ const MainPage: React.FC = () => {
     <>
       <div className={styles.container}>
         <SearchBar setUserInput={getDataByInput} />
-        {!loading && <div className={styles.wrapper}>{...list}</div>}
+        {list && <div className={styles.wrapper}>{...list}</div>}
       </div>
       {loading && (
         <div>
@@ -58,7 +47,7 @@ const MainPage: React.FC = () => {
         <>
           <DetailInformation
             handleModalWindow={handleModalWindow}
-            currentPictureId={activeCardId}
+            currentPictureId={activeCardId ? activeCardId : ''}
           />
         </>
       )}
