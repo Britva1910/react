@@ -10,7 +10,7 @@ import { useAppSelector } from '../../../store/reducers/redux';
 const MainPage: React.FC = () => {
   const [modalWindowStatus, setModalWindowStatus] = useState(false);
   const [activeCardId, setActiveCardId] = useState<string>();
-  const [inputValue, setInputValue] = useState('');
+  const { userInput } = useAppSelector((state) => state.searchReducer);
 
   const handleModalWindow = (id: string | undefined, status: boolean) => {
     setModalWindowStatus(status);
@@ -19,11 +19,7 @@ const MainPage: React.FC = () => {
     }
   };
 
-  const { data, error, isLoading } = imageAPI.useFetchImagesByWordQuery(inputValue);
-
-  const getDataByInput = (userInput: string) => {
-    setInputValue(userInput);
-  };
+  const { data, error, isLoading } = imageAPI.useFetchImagesByWordQuery(userInput);
 
   const list = data?.results.map((item) => (
     <Card cardData={item} key={item.id} handleModalWindow={handleModalWindow} />
@@ -32,7 +28,7 @@ const MainPage: React.FC = () => {
   return (
     <>
       <div className={styles.container}>
-        <SearchBar setUserInput={getDataByInput} />
+        <SearchBar />
         {list && <div className={styles.wrapper}>{...list}</div>}
       </div>
       {isLoading && (
