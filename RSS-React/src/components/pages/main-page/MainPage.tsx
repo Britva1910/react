@@ -36,6 +36,7 @@ const MainPage: React.FC = () => {
           <Loader />
         </div>
       )}
+      {error && <h1>Ooops .... the server doesn't seem to want to response </h1>}
       {modalWindowStatus && (
         <>
           <DetailInformation
