@@ -30,3 +30,8 @@
   height: 20px;
   background-color: rgb(186, 194, 191);
 }
+
+h1 {
+  margin: 0 auto;
+  font-size: 30px;
+}

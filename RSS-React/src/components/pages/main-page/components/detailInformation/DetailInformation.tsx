@@ -13,22 +13,9 @@ export interface IDetailInformationProps {
 }
 
 function DetailInformation(props: IDetailInformationProps) {
-  const [currentCardData, setCurrentCardData] = useState<IImageData>();
-  const [loading, setLoading] = useState(true);
+  const [currentCardData] = useState<IImageData>();
 
   const { data, isLoading } = imageAPI.useFetchImageByIDQuery(props.currentPictureId);
-
-  /* useEffect(() => {
-    axios
-      .get<IImageData>(
-        `https://api.unsplash.com/photos/${props.currentPictureId}?client_id=xJGDNkDt7wD9WsFgcHle9TXtWZKQRC7NLv6-rfAO8lY`
-      )
-      .then((response) => {
-        setCurrentCardData(response.data);
-        setTimeout(() => setLoading(false), 1000);
-      })
-      .catch((e) => console.log(e));
-  }, [props.currentPictureId]); */
 
   const tagsList = currentCardData?.tags_preview.map((item, index) => (
     <li key={index.toString()}>{item.title}</li>

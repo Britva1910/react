@@ -12,6 +12,7 @@ const SearchBar: React.FC = () => {
 
   useEffect(() => {
     setUserInputData(userInput);
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
 
   const handleChange = (event: ChangeEvent<HTMLInputElement>): void => {
