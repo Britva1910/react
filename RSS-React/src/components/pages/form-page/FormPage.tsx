@@ -4,10 +4,14 @@ import PersonCard from '../../personCard/PersonCard';
 import styles from './form-page.module.scss';
 import { IPersonCard } from '../../../shared/models';
 import ModalPage from '../../modalPage/ModalPage';
+import { useAppDispatch, useAppSelector } from '../../../store/reducers/redux';
+import { formSlice } from '../../../store/reducers/formData';
 
 const FormPage: React.FC = () => {
-  const [cards, setCards] = useState<IPersonCard[]>([]);
   const [modalVisible, setModalVisible] = useState<boolean>(false);
+  const { cardsData } = useAppSelector((state) => state.formReducer);
+  const { setCardsData } = formSlice.actions;
+  const dispatch = useAppDispatch();
 
   const updateStateFormPage = (value: IPersonCard) => {
     const file = value.file?.[0];
@@ -15,7 +19,7 @@ const FormPage: React.FC = () => {
       const blob = new Blob([file], { type: 'application/pdf' });
       value.file = URL.createObjectURL(blob);
     }
-    setCards([...cards, value]);
+    dispatch(setCardsData(value));
     setModalVisible(true);
   };
 
@@ -27,7 +31,7 @@ const FormPage: React.FC = () => {
     <div>
       <Form updateData={updateStateFormPage} />
       <ul className={styles.card_list}>
-        {cards.map((item, index) => (
+        {cardsData.map((item, index) => (
           <li key={index}>
             <PersonCard data={item} />
           </li>

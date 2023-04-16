@@ -1,9 +1,11 @@
-import { combineReducers, configureStore, getDefaultMiddleware } from '@reduxjs/toolkit';
+import { combineReducers, configureStore } from '@reduxjs/toolkit';
 import searchReducer from '../store/reducers/searchData';
+import formReducer from '../store/reducers/formData';
 import { imageAPI } from '../services/ImagesService';
 
 const rootReducer = combineReducers({
   searchReducer,
+  formReducer,
   [imageAPI.reducerPath]: imageAPI.reducer,
 });
 
