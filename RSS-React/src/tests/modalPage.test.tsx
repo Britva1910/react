@@ -1,5 +1,5 @@
 import { render, screen, fireEvent } from '@testing-library/react';
-import ModalPage from '../components/pages/main-page/MainPage';
+import ModalPage from '../components/modalPage/ModalPage';
 import { vi } from 'vitest';
 
 describe('ModalPage', () => {
@@ -10,12 +10,12 @@ describe('ModalPage', () => {
   it('renders the modal page with the expected content', () => {
     const closePage = vi.fn();
 
-    render(<ModalPage />);
+    render(<ModalPage modalVisible={false} closePage={closePage} />);
 
     const okButton = screen.getByRole('button');
     expect(okButton).toBeInTheDocument();
 
     fireEvent.click(okButton);
-    expect(closePage).toHaveBeenCalledTimes(0);
+    expect(closePage).toHaveBeenCalledTimes(1);
   });
 });
