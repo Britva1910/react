@@ -1,6 +1,6 @@
 import { render, screen } from '@testing-library/react';
 import { MemoryRouter } from 'react-router-dom';
-import Header from '../components/header/Header';
+import Header from '../components/header/header';
 
 describe('Header', () => {
   it('should display the correct page name based on the URL', () => {

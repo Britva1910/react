@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
 import SearchBar from '../../search-bar/SearchBar';
 import styles from './main-page.module.scss';
-import Card from '../../card/Card';
+import Card from '../../card/card';
 import { Loader } from '../../loader/Loader';
 import DetailInformation from './components/detailInformation/DetailInformation';
 import { imageAPI } from '../../../services/ImagesService';

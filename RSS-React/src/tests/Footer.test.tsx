@@ -1,6 +1,6 @@
 import React from 'react';
 import { render } from '@testing-library/react';
-import Footer from '../components/footer/Footer';
+import Footer from '../components/footer/footer';
 
 describe('Footer component', () => {
   it('renders the wrapper element', () => {
