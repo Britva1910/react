@@ -11,7 +11,9 @@ node_modules
 coverage
 dist
 dist-ssr
+.nyc_output
 *.local
+instrumented
 
 # Editor directories and files
 .vscode/*

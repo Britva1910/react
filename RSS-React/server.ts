@@ -1,7 +1,7 @@
 import fs from 'node:fs/promises';
 import express from 'express';
 
-const PORT = 5173;
+const PORT = 5000;
 
 const app = express();
 
