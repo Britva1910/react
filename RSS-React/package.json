@@ -16,7 +16,10 @@
     "coverage": "vitest run --coverage",
     "cy:open": "cypress open",
     "cy:run": "cypress run",
-    "cy:report": "npx nyc report --reporter=text-summary"
+    "cy:report": "npx nyc report --reporter=text-summary",
+    "e2e": "start-server-and-test server http://localhost:5000 cy:run",
+    "e2e:interface": "start-server-and-test server http://localhost:5000 cy:open",
+    "e2e:coverage": "npm run e2e && npm run cy:report"
   },
   "dependencies": {
     "@fortawesome/fontawesome-svg-core": "^6.4.0",

@@ -5,7 +5,6 @@ const PORT = 5000;
 
 const app = express();
 
-// Add Vite or respective production middlewares
 const { createServer } = await import('vite');
 
 const vite = await createServer({
