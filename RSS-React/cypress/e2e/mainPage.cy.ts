@@ -2,6 +2,7 @@
 describe('MainPage component', () => {
   beforeEach(() => {
     cy.visit('http://localhost:5000');
+    cy.viewport(1024, 1000);
   });
 
   it('displays search bar', () => {
@@ -30,5 +31,24 @@ describe('MainPage component', () => {
   it('test form link', () => {
     cy.contains('Form').click();
     cy.url().should('include', '/form');
+  });
+
+  /* detail informations */
+
+  it('show detail information', () => {
+    cy.get('input').type('cars').get('button').click();
+    cy.get('._wrapper_gw4a2_1').first().click();
+    cy.wait(1000);
+    cy.contains('Publication date: 2017-04-14T17:20:15Z').should('exist');
+    cy.contains('Tags:').should('exist');
+  });
+
+  it('detail information will be closed after clicking cross button', () => {
+    cy.get('input').type('cars').get('button').click();
+    cy.get('._wrapper_gw4a2_1').first().click();
+    cy.wait(1000);
+    cy.get('._btn__close_pvwkq_36').click();
+    cy.contains('Publication date: 2017-04-14T17:20:15Z').should('not.exist');
+    cy.contains('Tags:').should('not.exist');
   });
 });
