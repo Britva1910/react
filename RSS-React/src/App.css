@@ -1,0 +1,25 @@
+* {
+  box-sizing: border-box;
+  font-size: 10px;
+  margin: 0;
+  padding: 0;
+}
+
+a {
+  color: rgb(156, 50, 8);
+  text-decoration: none;
+  font-size: 2rem;
+}
+
+.active {
+  color: chartreuse;
+}
+
+.app {
+  position: relative;
+  min-height: 100vh;
+}
+
+.page-content {
+  padding-bottom: 2.5em;
+}
